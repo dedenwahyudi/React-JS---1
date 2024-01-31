@@ -1,0 +1,28 @@
+CARA INSTALL REACT JS :
+1. download & install node.js
+2. download & install vite.js (react murni)
+3. - terminal : npm create vite@latest my-react-app -- --template react
+   - terminal : cd my-react-app
+   - terminal : npm install
+   - terminal : npm run dev
+
+CARA INSTALL TAILWIND CDD DI DALAM REACT JS :
+1. Buka link tailwind css : https://tailwindcss.com/
+2. Masuk ke menu Docs > Framework Guides
+3. Pilih Vite
+4. terminal : npm install -D tailwindcss postcss autoprefixer
+   terminal : npx tailwindcss init -p
+              - otomatis akan meng-generate file (postcss.config.js dan tailwind.config.cjs)
+5. Buka file tailwind.config.cjs, lalu replace baris content menjadi :
+   - content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"]
+6. Buka file src/index.css.
+   Hapus code yang ada, kemudian paste code berikut ini :
+      @tailwind base;
+      @tailwind components;
+      @tailwind utilities;
+7. Delete file src/App.css
+8. Buka file scr/App.jcs,
+   Hapus baris : import "./App.css";
+9. terminal : npm run dev
+10. Selesai
+
