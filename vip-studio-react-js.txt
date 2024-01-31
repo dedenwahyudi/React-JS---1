@@ -26,3 +26,6 @@ CARA INSTALL TAILWIND CDD DI DALAM REACT JS :
 9. terminal : npm run dev
 10. Selesai
 
+EKSTENSI VS CODE :
+1. Codeium : AI Coding Autocomplete and Chat for Python, Javascript, Typescript, Java, Go, and more
+
