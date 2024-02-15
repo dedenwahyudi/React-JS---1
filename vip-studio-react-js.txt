@@ -349,6 +349,81 @@ EVEN HANDLER :
       };
 
       export default Button;
+----------------------------------------------------------------------------------------------------------------------
+STATE :
+State bisa dibilang sebuah memory, yang dimiliki oleh komponen.
+Jadi didalam sebuah komponen, kita seringkali perlu mengubah apa yang ada didalam layar, seperti hasil/bentuk
+dari interaksi. Mengetikkan sesuatu kedalam form, memindahkan carousel, mengklik button, menambahkan ke keranjang,
+dan lain sebagainya.
+Sehingga yang ditampilkan didalam layar akan lebih dinamis.
+
+STATEFULL COMPONENT :
+   Membuat sebuah komponen menggunakan class
+
+STATELESS COMPONENT :
+   Komponen yang kita buat menggunakan function
+
+PERBEDAAN STATEFULL DAN STATELESS COMPONENT :
+   - Jika ingin menggunakan State, itu tidak bisa kita menggunakan Stateless Component/Functional Component.
+     Kita perlu menggunakan Statefull Component/Class Component
+
+
+Contoh :
+
+import React from "react";
+
+class Counter extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      count: 0,
+    };
+  }
+
+  render() {
+    return (
+      <div className="flex items-center">
+        <h1 className="mr-5">{this.state.count}</h1>
+        <button
+          className="bg-black text-white p-3"
+          onClick={() => this.setState({ count: this.state.count + 1 })}
+        >
+          +
+        </button>
+      </div>
+    );
+  }
+}
+
+export default Counter;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
