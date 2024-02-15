@@ -115,7 +115,9 @@ Ini berfungsi ketika kita berpindah URL, tidak perlu meminta dokumen lain dari s
           Login
         </Link>
 -----------------------------------------------------------------------------------------------------------------
-
+CONDITIONAL RENDERING :
+   1. studi kasus : misalkan kita memiliki komponen, mungkin saja komponen yang sama, tetapi ingin menampilkan
+		    hal yang berbeda dengan kondisi tertentu.
 
 
 
