@@ -5,7 +5,7 @@ CARA INSTALL REACT JS :
       - terminal : cd my-react-app
       - terminal : npm install
       - terminal : npm run dev
------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------
 CARA INSTALL TAILWIND CDD DI DALAM REACT JS :
    1. Buka link tailwind css : https://tailwindcss.com/
    2. Masuk ke menu Docs > Framework Guides
@@ -25,10 +25,10 @@ CARA INSTALL TAILWIND CDD DI DALAM REACT JS :
       Hapus baris : import "./App.css";
    9. terminal : npm run dev
    10. Selesai
------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------
 EKSTENSI VS CODE :
    1. Codeium : AI Coding Autocomplete and Chat for Python, Javascript, Typescript, Java, Go, and more
------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------
 COMPONENTS :
 Buat struktur folder didalam directory "src" :
    1. atoms (rename)=> Elements
@@ -40,7 +40,7 @@ Buat struktur folder didalam directory "src" :
    4. templates (rename)=> Layouts
    5. pages
       => untuk pages simpan didalam directory "src/pages"
------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------
 REACT ROUTER (LIBRARY) :
 Link Dokumentasi : https://reactrouter.com/en/main
 
@@ -114,14 +114,56 @@ Ini berfungsi ketika kita berpindah URL, tidak perlu meminta dokumen lain dari s
         <Link to="/login" className="font-bold text-blue-600">
           Login
         </Link>
------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------
 CONDITIONAL RENDERING :
    1. studi kasus : misalkan kita memiliki komponen, mungkin saja komponen yang sama, tetapi ingin menampilkan
 		    hal yang berbeda dengan kondisi tertentu.
 
+   2. menggunakan ternary operator dan && :
+      <p className="text-sm mt-5 text-center">
+        {type === "login"
+          ? "Dont't have an account? "
+          : "Already have an account? "}
 
+        {type === "login" && (
+          <Link to="/register" className="font-bold text-blue-600">
+            Register
+          </Link>
+        )}
+        {type === "register" && (
+          <Link to="/login" className="font-bold text-blue-600">
+            Login
+          </Link>
+        )}
+      </p>
 
-
+   3. menggunakan If Statement :
+      const Navigation = ({ type }) => {
+        if (type === "login") {
+          return (
+            <p className="text-sm mt-5 text-center">
+              Dont't have an account?{" "}
+              <Link to="/register" className="font-bold text-blue-600">
+                Register
+              </Link>
+            </p>
+          );
+        } else {
+          return (
+            <p className="text-sm mt-5 text-center">
+              Already have an account?{" "}
+              <Link to="/login" className="font-bold text-blue-600">
+                Login
+              </Link>
+            </p>
+          );
+        }
+      };
+----------------------------------------------------------------------------------------------------------------------
+NESTED COMPONENT :
+Komponen yang berada didalam sebuah komponen.
+Contoh : Ketika kita memiliki <AuthLayout />, kemudian didalam <AuthLayout /> kita punya sebuah komponen lagi yaitu
+	 <FormLogin />
 
 
 
