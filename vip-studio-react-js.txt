@@ -5,7 +5,7 @@ CARA INSTALL REACT JS :
       - terminal : cd my-react-app
       - terminal : npm install
       - terminal : npm run dev
-
+-----------------------------------------------------------------------------------------------------------------
 CARA INSTALL TAILWIND CDD DI DALAM REACT JS :
    1. Buka link tailwind css : https://tailwindcss.com/
    2. Masuk ke menu Docs > Framework Guides
@@ -25,10 +25,10 @@ CARA INSTALL TAILWIND CDD DI DALAM REACT JS :
       Hapus baris : import "./App.css";
    9. terminal : npm run dev
    10. Selesai
-
+-----------------------------------------------------------------------------------------------------------------
 EKSTENSI VS CODE :
    1. Codeium : AI Coding Autocomplete and Chat for Python, Javascript, Typescript, Java, Go, and more
-
+-----------------------------------------------------------------------------------------------------------------
 COMPONENTS :
 Buat struktur folder didalam directory "src" :
    1. atoms (rename)=> Elements
@@ -40,11 +40,81 @@ Buat struktur folder didalam directory "src" :
    4. templates (rename)=> Layouts
    5. pages
       => untuk pages simpan didalam directory "src/pages"
-   
+-----------------------------------------------------------------------------------------------------------------
+REACT ROUTER (LIBRARY) :
+Link Dokumentasi : https://reactrouter.com/en/main
 
+Cara Install Library React Router :
+   1. terminal : npm install react-router-dom
+   2. tunggu sampai selesai mendownload
+   3. import baris kode berikut ini didalam halaman utama (main.jsx) :
+      import { createBrowserRouter, RouterProvider } from "react-router-dom";
+   4. contoh sourcode yang sudah menerapkan react router untuk berpindah halaman (main.jsx) :
 
+	import { createBrowserRouter, RouterProvider } from "react-router-dom";
+	import LoginPage from "./pages/login.jsx";
+	import RegisterPage from "./pages/register.jsx";
+	import ErrorPage from "./pages/404.jsx";
 
+	const router = createBrowserRouter([
+  	   {
+    	     path: "/",
+    	     element: <div>Hello World!</div>,
+    	     errorElement: <ErrorPage />,
+  	   },
+  	   {
+    	     path: "/login",
+    	     element: <LoginPage />,
+  	   },
+  	   {
+    	     path: "/register",
+    	     element: <RegisterPage />,
+  	   },
+	]);
 
+	ReactDOM.createRoot(document.getElementById("root")).render(
+  	   <React.StrictMode>
+    	     <RouterProvider router={router} />
+  	   </React.StrictMode>
+	);
+
+   5. ErrorPage, ketika halaman yang di akses tidak ada (404.jsx) :
+
+	import { useRouteError } from "react-router-dom";
+
+	const ErrorPage = () => {
+  	   const error = useRouteError();
+
+  	   return (
+    	      <div className="flex justify-center min-h-screen items-center flex-col">
+      	        <h1 className="text-3xl font-bold">Oops!</h1>
+      	        <p className="my-5 text-xl">Sorry, an unexpected error has occured</p>
+      	        <p className="text-lg">{error.statusText || error.message}</p>
+    	       </div>
+  	   );
+	};
+
+	export default ErrorPage;
+
+CLIENT SIDE ROUTING :
+Ini berfungsi ketika kita berpindah URL, tidak perlu meminta dokumen lain dari server (tanpa melakukan loading) :
+
+   1. sourcode link to Register :
+	import { Link } from "react-router-dom";
+
+        Dont't have an account?{" "}
+        <Link to="/register" className="font-bold text-blue-600">
+          Register
+        </Link>
+
+   2. sourcode link to Login:
+	import { Link } from "react-router-dom";
+
+        Have an account?{" "}
+        <Link to="/login" className="font-bold text-blue-600">
+          Login
+        </Link>
+-----------------------------------------------------------------------------------------------------------------
 
 
 
