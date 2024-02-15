@@ -39,6 +39,7 @@ Buat struktur folder didalam directory "src" :
       => form
    4. templates (rename)=> Layouts
    5. pages
+      => untuk pages simpan didalam directory "src/pages"
    
 
 
