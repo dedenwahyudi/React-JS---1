@@ -28,6 +28,7 @@ CARA INSTALL TAILWIND CDD DI DALAM REACT JS :
 ----------------------------------------------------------------------------------------------------------------------
 EKSTENSI VS CODE :
    1. Codeium : AI Coding Autocomplete and Chat for Python, Javascript, Typescript, Java, Go, and more
+   2. ES7+ : ES7+ React/Redux/React-Native snippets
 ----------------------------------------------------------------------------------------------------------------------
 COMPONENTS :
 Buat struktur folder didalam directory "src" :
@@ -396,8 +397,10 @@ class Counter extends React.Component {
 }
 
 export default Counter;
-
-
+----------------------------------------------------------------------------------------------------------------------
+USESTATE :
+- Penggunaan State didalam Functional Component/Stateless Component, menggunakan (React Hook)
+- HOOK merupakan sebuah tools yang dimiliki oleh React, dan banyak fungsi-fungsi yang dapat kita gunakan
 
 
 
