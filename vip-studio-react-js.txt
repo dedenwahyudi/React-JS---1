@@ -402,11 +402,13 @@ USESTATE :
 - Penggunaan State didalam Functional Component/Stateless Component, menggunakan (React Hook)
 - HOOK merupakan sebuah tools yang dimiliki oleh React, dan banyak fungsi-fungsi yang dapat kita gunakan
 
+* useState - 1 : jika mengklik button add to cart, dan jika produk yang sama yang di klik,
+                 untuk yang ke 2x dan seterusnya list nya yang akan bertambah bukan qty nya
+* useState - 2 : jika produk yang sama di klik add to cart maka yang bertabah qty nya bukan listnya
+----------------------------------------------------------------------------------------------------------------------
+LIFECYCLE :
 
-
-
-
-
+Link : https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/
 
 
 
