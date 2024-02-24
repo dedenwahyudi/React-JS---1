@@ -409,8 +409,49 @@ USESTATE :
 LIFECYCLE :
 
 Link : https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/
+----------------------------------------------------------------------------------------------------------------------
+USE EFFECT :
+Sebuah hooks yang bisa kita manfaatkan untuk memanipulasi komponen.
+Manipulasi pada sebuah komponen dilakukan untuk sinkronisasi antar komponen.
 
+- setiap useEffect mempunyai dependency, nilai dari dependency bisa saja kosong
+  dependency tersebut digunakan untuk fungsi yang kedua yaitu componentDidUpdate
 
+  - componentDidMount :
+      componentDidMount() {
+        this.setState({ count: 1 });
+        console.log("componentDidMount");
+      }
+
+  - componentDidUpdate :
+       componentDidUpdate(prevProps, prevState) {
+          console.log("componentDidUpdate");
+          if (this.state.count === 10) {
+            this.setState({ count: 5 });
+          }
+        }
+
+  - componentDidMount didalam useEffect :
+      useEffect(() => {
+        setCart([{ id: 1, qty: 3 }]);
+      }, []);
+
+  - componentDidUpdate didalam useEffect :
+      useEffect(() => {
+        const sum = cart.reduce((acc, item) => {
+          const product = products.find((product) => product.id === item.id);
+          return acc + product.price * item.qty;
+        }, 0);
+        setTotalPrice(sum);
+      }, [cart]);
+----------------------------------------------------------------------------------------------------------------------
+USE REF :
+Yang membedakan antara useRef dengan useState adalah.
+jika menggunakan useRef :
+  - tidak akan melakukan re-render komponen
+    contoh : jika sebelumnya menggunakan useState ketika menambahkan produk jual kedalam cart, otomatis akan langsung
+             di tampilkan di view barang yang di beli, qty dan jumlah harganya. sedangkan jika menggunakan useRef
+             data akan di simpan kedalam local storage teteapi tidak akan di tampilkan kedalam view terlebih dahulu
 
 
 
