@@ -1,4 +1,4 @@
-CARA INSTALL REACT JS :
+CARA INSTALL REACT JS.
    1. download & install node.js
    2. download & install vite.js (react murni)
    3. - terminal : npm create vite@latest my-react-app -- --template react
@@ -6,7 +6,7 @@ CARA INSTALL REACT JS :
       - terminal : npm install
       - terminal : npm run dev
 ----------------------------------------------------------------------------------------------------------------------
-CARA INSTALL TAILWIND CDD DI DALAM REACT JS :
+CARA INSTALL TAILWIND CDD DI DALAM REACT JS.
    1. Buka link tailwind css : https://tailwindcss.com/
    2. Masuk ke menu Docs > Framework Guides
    3. Pilih Vite
@@ -26,11 +26,11 @@ CARA INSTALL TAILWIND CDD DI DALAM REACT JS :
    9. terminal : npm run dev
    10. Selesai
 ----------------------------------------------------------------------------------------------------------------------
-EKSTENSI VS CODE :
+EKSTENSI VS CODE.
    1. Codeium : AI Coding Autocomplete and Chat for Python, Javascript, Typescript, Java, Go, and more
    2. ES7+ : ES7+ React/Redux/React-Native snippets
 ----------------------------------------------------------------------------------------------------------------------
-COMPONENTS :
+COMPONENTS.
 Buat struktur folder didalam directory "src" :
    1. atoms (rename)=> Elements
       => element kecil seperti button, input, label dll
@@ -42,7 +42,7 @@ Buat struktur folder didalam directory "src" :
    5. pages
       => untuk pages simpan didalam directory "src/pages"
 ----------------------------------------------------------------------------------------------------------------------
-REACT ROUTER (LIBRARY) :
+REACT ROUTER (LIBRARY).
 Link Dokumentasi : https://reactrouter.com/en/main
 
 Cara Install Library React Router :
@@ -97,7 +97,7 @@ Cara Install Library React Router :
 
 	export default ErrorPage;
 
-CLIENT SIDE ROUTING :
+CLIENT SIDE ROUTING.
 Ini berfungsi ketika kita berpindah URL, tidak perlu meminta dokumen lain dari server (tanpa melakukan loading) :
 
    1. sourcode link to Register :
@@ -116,7 +116,7 @@ Ini berfungsi ketika kita berpindah URL, tidak perlu meminta dokumen lain dari s
           Login
         </Link>
 ----------------------------------------------------------------------------------------------------------------------
-CONDITIONAL RENDERING :
+CONDITIONAL RENDERING.
    1. studi kasus : misalkan kita memiliki komponen, mungkin saja komponen yang sama, tetapi ingin menampilkan
 		    hal yang berbeda dengan kondisi tertentu.
 
@@ -161,18 +161,18 @@ CONDITIONAL RENDERING :
         }
       };
 ----------------------------------------------------------------------------------------------------------------------
-NESTED COMPONENT :
+NESTED COMPONENT.
 Komponen yang berada didalam sebuah komponen.
 Contoh : Ketika kita memiliki <AuthLayout />, kemudian didalam <AuthLayout /> kita punya sebuah komponen lagi yaitu
 	 <FormLogin />
 
 ----------------------------------------------------------------------------------------------------------------------
-NESTED COMPONENT :
+NESTED COMPONENT.
 Komponen yang berada didalam sebuah komponen.
 Contoh : Ketika kita memiliki <AuthLayout />, kemudian didalam <AuthLayout /> kita punya sebuah komponen lagi yaitu
 	 <FormLogin />
 ----------------------------------------------------------------------------------------------------------------------
-RENDERING LIST :
+RENDERING LIST.
 
 import CardProduct from "../components/Fragments/CardProduct";
 
@@ -222,7 +222,7 @@ const ProductsPage = () => {
 
 export default ProductsPage;
 ----------------------------------------------------------------------------------------------------------------------
-EVEN HANDLER :
+EVEN HANDLER.
    1. src/components/Fragments/FormLogin.jsx
 
       import Button from "../Elements/Button";
@@ -351,7 +351,7 @@ EVEN HANDLER :
 
       export default Button;
 ----------------------------------------------------------------------------------------------------------------------
-STATE :
+STATE.
 State bisa dibilang sebuah memory, yang dimiliki oleh komponen.
 Jadi didalam sebuah komponen, kita seringkali perlu mengubah apa yang ada didalam layar, seperti hasil/bentuk
 dari interaksi. Mengetikkan sesuatu kedalam form, memindahkan carousel, mengklik button, menambahkan ke keranjang,
@@ -398,7 +398,7 @@ class Counter extends React.Component {
 
 export default Counter;
 ----------------------------------------------------------------------------------------------------------------------
-USESTATE :
+USESTATE.
 - Penggunaan State didalam Functional Component/Stateless Component, menggunakan (React Hook)
 - HOOK merupakan sebuah tools yang dimiliki oleh React, dan banyak fungsi-fungsi yang dapat kita gunakan
 
@@ -410,7 +410,7 @@ LIFECYCLE :
 
 Link : https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/
 ----------------------------------------------------------------------------------------------------------------------
-USE EFFECT :
+USE EFFECT.
 Sebuah hooks yang bisa kita manfaatkan untuk memanipulasi komponen.
 Manipulasi pada sebuah komponen dilakukan untuk sinkronisasi antar komponen.
 
@@ -445,22 +445,102 @@ Manipulasi pada sebuah komponen dilakukan untuk sinkronisasi antar komponen.
         setTotalPrice(sum);
       }, [cart]);
 ----------------------------------------------------------------------------------------------------------------------
-USE REF :
+USE REF.
 Yang membedakan antara useRef dengan useState adalah.
 jika menggunakan useRef :
   - tidak akan melakukan re-render komponen
     contoh : jika sebelumnya menggunakan useState ketika menambahkan produk jual kedalam cart, otomatis akan langsung
              di tampilkan di view barang yang di beli, qty dan jumlah harganya. sedangkan jika menggunakan useRef
-             data akan di simpan kedalam local storage teteapi tidak akan di tampilkan kedalam view terlebih dahulu
+             data akan di simpan kedalam local storage tetapi tidak akan di tampilkan kedalam view terlebih dahulu
 
+Perbedaan useRef dengan useState.
+   - useState : memiliki setter seperti setProduct
+   - useRef : tidak memiliki setter, nilai sebelumnya langsung di timpa dengan nilai baru
 
+useRef juga bisa digunakan untuk memanipulasi DOM menggunakan document.getElementById/ClassName/...
 
+Study kasus :
+   Ketika sebuah cart pada kerangjang belanja kosong, maka total price tidak usah di munculkan.
 
+Contoh Penggunaan useRef pada Element DOM :
 
+   <tr ref={totalPriceRef}>
+   <tr />
 
+   const totalPriceRef = useRef(null);
 
+   useEffect(() => {
+       if (cart.length > 0) {
+         totalPriceRef.current.style.display = "table-row";
+       } else {
+         totalPriceRef.current.style.display = "none";
+       }
+   }, [cart]);
 
+Catatan : Pada useRef jika kita ingin menggunakan ref={ref} didalam parameter component, tidak bisa begitu saja 
+          di berikan seperti pada props pada umumnya, tetapi kita harus bungus kedalam forwardRef()
+Contoh :
 
+   import Label from "./Label";
+   import Input from "./Input";
+   import { forwardRef } from "react";
+
+   const InputForm = forwardRef((props, ref) => {
+     const { label, name, type, placeholder } = props;
+     return (
+       <div className="mb-6">
+         <Label htmlFor={name}>{label}</Label>
+         <Input
+           name={name}
+           type={type}
+           placeholder={placeholder}
+           ref={ref}
+         ></Input>
+       </div>
+     );
+   });
+
+   export default InputForm;
+----------------------------------------------------------------------------------------------------------------------
+GET DATA API.
+
+Link API : 
+https://fakestoreapi.com/
+
+Link :
+https://www.npmjs.com/
+
+Langkah-langkah menggunakan API call menggunakan Axios :
+1. terminal : npm i axios
+2. buat folder src > sercices
+3. buat file di dalam folder services dengan nama "product.service.js"
+4. didalam file "product.services.js" masukkan baris kode berikud ini untuk pemanggilan API :
+
+   import axios from "axios";
+
+   export const getProducts = (callback) => {
+     axios
+       .get("https://fakestoreapi.com/products")
+       .then((res) => {
+         callback(res.data);
+       })
+       .catch((err) => {
+         console.log(err);
+       });
+   };
+
+5. didalam file view atau "products.jsx" tambahkan state baru seperti berikut :
+
+   const [products, setProducts] = useState([]);
+
+   useEffect(() => {
+     getProducts((data) => {
+       setProducts(data);
+     });
+   }, []);
+
+----------------------------------------------------------------------------------------------------------------------
+POST DATA API.
 
 
 
