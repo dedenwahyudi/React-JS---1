@@ -542,15 +542,11 @@ Langkah-langkah menggunakan API call menggunakan Axios :
 ----------------------------------------------------------------------------------------------------------------------
 POST DATA API.
 
+https://jwt.io/
 
-
-
-
-
-
-
-
-
+Decode Token (JWT) :
+1. Buka : https://www.npmjs.com/package/jwt-decode
+2. Terminal : npm i jwt-decode
 
 
 
