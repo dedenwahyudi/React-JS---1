@@ -501,6 +501,7 @@ Contoh :
    });
 
    export default InputForm;
+
 ----------------------------------------------------------------------------------------------------------------------
 GET DATA API.
 
@@ -538,7 +539,6 @@ Langkah-langkah menggunakan API call menggunakan Axios :
        setProducts(data);
      });
    }, []);
-
 ----------------------------------------------------------------------------------------------------------------------
 POST DATA API.
 
@@ -547,9 +547,69 @@ https://jwt.io/
 Decode Token (JWT) :
 1. Buka : https://www.npmjs.com/package/jwt-decode
 2. Terminal : npm i jwt-decode
+----------------------------------------------------------------------------------------------------------------------
+CUSTOM HOOKS.
 
+Jika sebelumnya kita sudah mengenal useState, useEffect, useRef. Itu merupakan hooks yang dimiliki oleh react js atau
+di sebut juga built in hook.
 
+Kita juga bisa membuat hooks sendiri atau user define hooks.
 
+Caranya :
+1. buat folder baru didalam src dengan nama hooks (src/hooks)
+2. buat sebuah file untuk menyimpan hooks (src/hooks/useLogin)
+3. biasakan dalam membuath custom hooks dengan memberikan nama depan "use", untuk membedakan function biasa atau hook
+4. contoh source code didalam file useLogin.jsx :
+
+   import { useEffect, useState } from "react";
+   import { getUsername } from "../services/auth.service";
+
+   export const useLogin = () => {
+     const [username, setUsername] = useState("");
+     useEffect(() => {
+       const token = localStorage.getItem("token");
+       if (token) {
+         setUsername(getUsername(token));
+       } else {
+         window.location.href = "/login";
+       }
+     }, []);
+
+     return username;
+   };
+
+5. sourcode tersebut berfungsi untuk mengambil username dari generate token yang di dapatkan
+6. kemudian setelah didapatkan username maka function useLogin() tersebut bisa di panggil di halaman manapun
+7. kemudian di dalam file page/halaman yang dingin di tambahkan fungsi tersebut
+   tinggal meng-import fungsi useLogin tersebut seperti berikut ini contoh source codenya :
+
+   import { useLogin } from "../hooks/useLogin";
+   const username = useLogin();
+
+   return (
+       <Fragment>
+         <div className="flex justify-end h-20 bg-blue-600 text-white items-center px-10">
+           {username}
+           <Button classname="ml-5 bg-black" onClick={handleLogout}>
+             Logout
+           </Button>
+         </div>
+   );
+
+8. kemudian di page/halaman yang berbeda juga bisa menambahkan nya :
+   import { useLogin } from "../hooks/useLogin";
+
+   const ProfilePage = () => {
+     const username = useLogin();
+     return (
+       <div>
+         <h1>Profile</h1>
+         Username : {username}
+       </div>
+     );
+   };
+
+   export default ProfilePage;
 
 
 
