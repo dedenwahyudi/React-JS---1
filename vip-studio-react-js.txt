@@ -713,4 +713,125 @@ Contoh :
    KETERANGAN :
    - Baris code berikut ini {Object.keys(product).length > 0 && (
      digunakan untuk mengecek apakah variabel product memiliki nilai array lebih dari 0. jika ya maka render HTML
+----------------------------------------------------------------------------------------------------------------------
+REDUX - STATE MANAGEMENT.
+
+ketika kita ingin melakukan sebuah perubahan terhadap suatu state. dan kita sudah menerapkan atomic design,
+otomatis ketika kita ingin melakukan perubahan di child componentnya, itu kita perlu mengirimkan handlernya atau
+setStatenya nantinya itu ke childnya juga.
+
+contohnya disini, ketika kita akan menambahkan produk kedalam keranjang, didalam component button add chart nya kita
+harus mengirimkan sebuah function yaitu handleAddToCart={handleAddToCart} untuk memasukkan kedalam statenya nanti
+supaya nanti bertambah produknya didalam cardnya.
+
+itu artinya kita harus parsing atau mengirimkan fungsi tersebut	melalui props, juga mungkin ketika kita nanti sudah
+menerapkan konsep atomic design yang seutuhnya, semakin banyak komponen yang ada didalam aplikasi react kita,
+ketika kita ingin menggunakan state yang ada di parent paling luarnya atau paling atasnya. itu mau tidak mau berarti
+kita harus selalu mengirimkan statenya itu ke childnya.
+
+jadi fungsi dari state management ini adalah untuk memudahkan mengirim state tanpa kita harus menggunakan props,
+jadi kita kirimkan ke childnya props untuk statenya. itu tentu sangat ribet, mungkin kalau hanya 1 atau 2 child aja
+itu masih masuk akal, bagaimana kalau misalkan dari si parentnya ini dia punya child, childnya punya child lagi,
+punya child lagi dan seterusnya. itu kebayang panjang banget.
+
+ada beberapa yang bisa kita manfaatkan, untuk membuat state management ini, yang paling populer saat ini adalah
+menggunakan REDUX. jadi redux ini adalah sebuah state container untuk javascript application.
+
+Link REDUX : https://redux.js.org/
+
+ada juga selain redux yang populer digunakan yang dimiliki oleh react yaitu CONTEXT.
+
+          -------------------------------------------------
+	  |                                               |
+          |                                               |
+  -----------------			       -------------------------
+  |   DISPATCH    |			       |         STORE         |
+  | Event Handler |			       |    ----------------   |
+  -----------------                            |   |    REDUCER     |  |
+           |                                   |   |  R          R  |  |
+           |                                   |   |        R       |  |
+           |                                   |    ----------------   |
+           |                                   |                       |
+           |                                   |      ----------       |
+           |                                   -------| STATE  |--------
+           |                                          ----------            
+           |              UI                               |
+           |   --------------------------                  |
+           |   |   Deposite $0          |                  |
+           ----|   WithDraw $10    $0   |<------------------
+               --------------------------
+
+Cara Implementasi REDUX :
+1. install library redux
+   terminal : npm i redux
+2. untuk menjalankan redux setelah membuat reducer, store, subscribe dan dispatch
+   terminal : node redux
+
+sourcode redux.jsx :
+
+   import { legacy_createStore } from "redux";
+
+   // reducer
+   const cartReducer = (
+     state = {
+       cart: [
+         {
+           id: 1,
+           qty: 20,
+         },
+       ],
+     },
+     action
+   ) => {
+     switch (action.type) {
+       case "ADD_TO_CART":
+         return {
+           ...state,
+           cart: [...state.cart, action.payload],
+         };
+       default:
+         return state;
+     }
+   };
+
+   // store
+   const store = legacy_createStore(cartReducer);
+   console.log("oncreate store : ", store.getState());
+
+   // subscribe (untuk melihat perubahan yang terjadi didalam store)
+   store.subscribe(() => {
+     console.log("STORE CHANGE : ", store.getState());
+   });
+
+   // dispatch
+   const action1 = { type: "ADD_TO_CART", payload: { id: 2, qty: 20 } };
+   store.dispatch(action1);
+
+   const action2 = { type: "ADD_TO_CART", payload: { id: 10, qty: 5 } };
+   store.dispatch(action2);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
