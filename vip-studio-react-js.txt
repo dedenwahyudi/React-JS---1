@@ -610,9 +610,107 @@ Caranya :
    };
 
    export default ProfilePage;
+----------------------------------------------------------------------------------------------------------------------
+DYNAMIC ROUTING.
 
+Di video sebelumnya kita sudah pernah membuat sistem routing menggunakan React Router.
+Yang di maksud dengan Dynamic Routing adalah, kalau misalkan kita masuk ke "/products",
+lalu meng-klik 1 buah product entah itu gambarnya atau teksnya, maka akan ber-alih ke halaman detail product.
 
+Contoh :
+1. Tambahkan path di dalam file main.jsx
 
+   import React from "react";
+   import ReactDOM from "react-dom/client";
+   import "./index.css";
 
+   import { createBrowserRouter, RouterProvider } from "react-router-dom";
+   import DetailProductPage from "./pages/detailProduct";
 
+   const router = createBrowserRouter([
+     {
+       path: "/product/:id",
+       element: <DetailProductPage />,
+     },
+   ]);
+
+   ReactDOM.createRoot(document.getElementById("root")).render(
+     <React.StrictMode>
+       <RouterProvider router={router} />
+     </React.StrictMode>
+   );
+
+   KETERANGAN :
+   - didalam path di berikan parameter ":id"
+
+2. buat sebuah file baru di dalam folder pages dengan nama "detailProduct.jsx" (pages/detailProduct.jsx), sourcode :
+
+   *sourcode sebelum menggunakan React Router DOM :
+
+   const DetailProductPage = () => {
+     return (
+       <div>
+         <div>Detail : {id}</div>
+       </div>
+     );
+   };
+
+   export default DetailProductPage;
+
+3. untuk menangkap parameter (:id) yang di kirimkan dari path yang ada di dalam file main.jsx, yaitu dengan cara
+   menggunakan React Router DOM seperti yang di terapkan di atas.
+   
+   *sourcode setelah menggunakan React Router DOM :
+
+   import { useParams } from "react-router-dom";
+
+   const DetailProductPage = () => {
+     const { id } = useParams();
+     return (
+       <div>
+         <div>Detail : {id}</div>
+       </div>
+     );
+   };
+
+   export default DetailProductPage;
+
+4. sourcode yang telah di update dan di lengkapi :
+
+   import { useEffect, useState } from "react";
+   import { useParams } from "react-router-dom";
+   import { getDetailProduct } from "../services/product.service";
+
+   const DetailProductPage = () => {
+   const { id } = useParams();
+   const [product, setProduct] = useState({});
+
+   useEffect(() => {
+     getDetailProduct(id, (data) => {
+       setProduct(data);
+      });
+   }, [id]);
+
+   return (
+     <div className="w-100 min-h-screen flex justify-center items-center">
+       {Object.keys(product).length > 0 && (
+         <div className="flex font-sans max-w-xl">
+           <div className="flex-none w-48 relative">
+             <img
+               src={product.image}
+               alt={product.title}
+               className="absolute inset-0 w-full h-full object-cover"
+               loading="lazy"
+             />
+           </div>
+
+           // Element HTML lainnya..
+       )}
+     </div>
+
+   export default DetailProductPage;
+
+   KETERANGAN :
+   - Baris code berikut ini {Object.keys(product).length > 0 && (
+     digunakan untuk mengecek apakah variabel product memiliki nilai array lebih dari 0. jika ya maka render HTML
 
