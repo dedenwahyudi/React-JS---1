@@ -730,7 +730,7 @@ ketika kita ingin menggunakan state yang ada di parent paling luarnya atau palin
 kita harus selalu mengirimkan statenya itu ke childnya.
 
 jadi fungsi dari state management ini adalah untuk memudahkan mengirim state tanpa kita harus menggunakan props,
-jadi kita kirimkan ke childnya props untuk statenya. itu tentu sangat ribet, mungkin kalau hanya 1 atau 2 child aja
+jadi kita kirimkan ke childnya props untuk statenya. itu tentu sangat ribet, mungkin kalau hanya 1 atau 2 child aja 
 itu masih masuk akal, bagaimana kalau misalkan dari si parentnya ini dia punya child, childnya punya child lagi,
 punya child lagi dan seterusnya. itu kebayang panjang banget.
 
@@ -913,6 +913,85 @@ cara ke 2 :
    // dispatch
    store.dispatch(cartSlice.actions.addToCart({ id: 1, qty: 20 }));
    store.dispatch(cartSlice.actions.addToCart({ id: 2, qty: 10 }));
+----------------------------------------------------------------------------------------------------------------------
+IMPLEMENTASI REACT REDUX.
+
+1. install library react redux
+   terminal : npm i react-redux
+2. buat sebuah folder baru untuk menyimpan file react-redux (path : src/redux)
+3. buat file baru di dalam folder redux dengan nama store.js atau bisa di sesuaikan (path : src/redux/store.js)
+4. buat folder baru lagi di dalam folder redux dengan nama action (path : src/redux/action),
+   alternatif kedua yaitu mengubah folder (path : src/redux/action) menjadi (path : src/redux/slice). ini yang akan kita gunakan
+5. buat file baru di dalam folder slice dengan nama cartSlice.js (path : src/redux/slice/cartSlice.js) di sesuaikan dengan kebutuhan yang akan di buat
+6. note, karena disini kita akan menggunakan konsep slice, biasanya jika tidak menggunakan slice akan ada folder baru lagi dengan nama reducer untuk menyimpan       reducernya, tetapi karena kita menggunakan konsep slice jadi tidak perlu folder tersebut (path : src/redux/reducer)
+
+7. sourcode pada file (path : src/redux/store.js) :
+
+   import { configureStore } from "@reduxjs/toolkit";
+   import cartReducer from ".slice/cartSlice";
+
+   const store = configureStore({
+     reducer: { cart: cartReducer },
+   });
+
+   store.subscribe("store change : ", store.getState());
+
+   export default store;
+
+8. sourcode pada file (path : src/redux/slice/cartSlice.js) :
+
+   import { createSlice } from "@reduxjs/toolkit";
+
+   const cartSlice = createSlice({
+     name: "cart",
+     initialState: {
+       data: [],
+     },
+     reducers: {
+       addToCart: (state, action) => {
+         state.data.push(action.payload);
+       },
+     },
+   });
+
+   export const { addToCart } = cartSlice.actions;
+   export default cartSlice.reducer;
+
+9. buka file main.jsx, tambahkan baris berikut di paling atas atau setelah import yang lain.
+
+   import { Provider } from "react-redux";
+   import store from "./redux/store";
+
+10. bungkus code dengan <Provider store={store}>CODE LAIN NYA</Provider>, seperti di bawah ini
+
+   ReactDOM.createRoot(document.getElementById("root")).render(
+     <React.StrictMode>
+       <Provider store={store}>
+         <RouterProvider router={router} />
+       </Provider>
+     </React.StrictMode>
+   );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
