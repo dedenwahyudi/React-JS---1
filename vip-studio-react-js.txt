@@ -973,21 +973,100 @@ IMPLEMENTASI REACT REDUX.
    );
 
 
+Catatan :
+- untuk mengambil data dari state management / store, bisa menggunakan sebuah method dari react redux yaitu "useSelector".
+  ex : const cart = useSelector()
 
 
+----------------------------------------------------------------------------------------------------------------------
+USE CONTEXT.
 
+link dokumentasi : https://react.dev/learn/passing-data-deeply-with-context
 
+useContect merupakan sebuah hook yang di miliki react, dan bukan merupakan third party seperti redux.
 
+jika kita menggunakan context, kita tidak perlu membuat sistem seperti store, tetapi benar-benar state pada umumnya
+menggunakan useState, tetapi menggunakan context kita bisa akses di children secara langsung, tanpa kita mengirimkan
+melalui props.
 
+CATATAN :
+jika kita menggunakan redux, itu di sediakan provider oleh redux.
+tapi jika menggunakan context, itu kita membuat sendiri providernya.
+tetapi sebetulnya konsepnya sama saja.
 
+IMPLEMENTASI :
+1. buat folder dengan nama context di dalam folder src
+2. buat sebuah file dengan nama DarkMode.jsx di dalam folder context
+3. sourcode
+   import { createContext, useState } from "react";
+ 
+   const DarkModeContext = createContext();
 
+   const DarkModeContextProvider = ({children}) => {
+     const [isDarkMode, setIsDarkMode] = useState(false);
+  
+     return (
+       <DarkModeContext.Provider value={{ isDarkMode, setIsDarkMode }}>
+           {children}
+       </DarkModeContext.Provider>
+     )
+   };
 
+   export const DarkMode = DarkModeContext;
+   export default DarkModeContextProvider;
 
+4. buka file main.jsx
+   ubah sourcode dari ini :
 
+      ReactDOM.createRoot(document.getElementById("root")).render(
+        <React.StrictMode>
+          <Provider store={store}>
+            <RouterProvider router={router} />
+          </Provider>
+        </React.StrictMode>
+      );
 
+   menjadi seperti ini :
 
+      ReactDOM.createRoot(document.getElementById("root")).render(
+        <React.StrictMode>
+          <Provider store={store}>
+            <DarkModeContextProvider>
+              <RouterProvider router={router} />
+            </DarkModeContextProvider>
+          </Provider>
+        </React.StrictMode>
+      );
 
+5. setelah langkah di atas selesai yaitu membuat context dan context provider,
+   kemudian sudah memanggil provider di dalam main.jxs
+   maka selanjutnya adalah meng-implementasikan context yang sudah di buat yaitu DarkMode
+6. buka file login.jsx, kemudian di dalam login.jsx akan memanggil component AuthLayouts.jsx,
+   disinilah kita akan meng-implementasikan context.
+7. sourcode AuthLayouts.jsc :
 
+      const AuthLayout = (props) => {
+        const { children, title, type } = props;
+        const { isDarkMode, setIsDarkMode } = useContext(DarkMode); // panggil context
+        { console.log(isDarkMode); }
+
+        return (
+          <div className={`flex justify-center min-h-screen items-center ${isDarkMode && "bg-slate-900"}`}>
+            <div className="w-full max-w-xs">
+              // buat button toggle dan buat pengkondisian
+              <button className="absolute right-2 top-2 bg-blue-600 p-2 text-white rounded" onClick={() => setIsDarkMode(!isDarkMode)}>
+                {isDarkMode ? "Light" : "Dark"}
+              </button>
+              <h1 className="text-3xl font-bold mb-2 text-blue-600">{title}</h1>
+              <p className="font-medium text-slate-500 mb-8">
+                Welcome, Please enter your details
+              </p>
+              {children}
+              <Navigation type={type} />
+            </div>
+          </div>
+        );
+      };
 
 
 
