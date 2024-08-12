@@ -478,7 +478,7 @@ Contoh Penggunaan useRef pada Element DOM :
    }, [cart]);
 
 Catatan : Pada useRef jika kita ingin menggunakan ref={ref} didalam parameter component, tidak bisa begitu saja 
-          di berikan seperti pada props pada umumnya, tetapi kita harus bungus kedalam forwardRef()
+          di berikan seperti pada props pada umumnya, tetapi kita harus bungkus kedalam forwardRef()
 Contoh :
 
    import Label from "./Label";
@@ -1067,6 +1067,13 @@ IMPLEMENTASI :
           </div>
         );
       };
+
+----------------------------------------------------------------------------------------------------------------------
+USE REDUCER.
+
+didalam sebuah redux yang sudah di pelajari sebelumnya terdapat redux, dispatch, reducer dan sebagainya.
+pertanyaannya, apakah ketika kita menggunakan context bisa seperti redux? menggunakan dispatch dan reducer tersebut.
+jawabannya adalah sangat bisa. berikut implementasinya.
 
 
 
